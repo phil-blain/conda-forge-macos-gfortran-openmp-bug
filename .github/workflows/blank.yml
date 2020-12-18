@@ -58,6 +58,7 @@ jobs:
         run: |
           source /Users/runner/.bash_profile
           conda activate gfortran-7.3
+          conda list
           gfortran -fopenmp omp.f90 -o omp
           type gfortran
           gfortran --version
@@ -66,6 +67,7 @@ jobs:
         run: |
           source /Users/runner/.bash_profile
           conda activate gfortran-7.5
+          conda list
           gfortran -fopenmp -lgcc_eh omp.f90 -o omp
           type gfortran
           gfortran --version
@@ -74,6 +76,7 @@ jobs:
         run: |
           source /Users/runner/.bash_profile
           conda activate compilers
+          conda list
           gfortran -fopenmp -lgcc_eh omp.f90 -o omp
           type gfortran
           gfortran --version
