@@ -34,13 +34,43 @@ jobs:
           source /Users/runner/.bash_profile
           conda create -c conda-forge -n compilers compilers
           curl https://raw.githubusercontent.com/OpenMP/Examples/master/sources/Example_threadprivate.5.f -o omp.f90
+      - name: compile with Homebrew Gfortran 8
+        run: |
+          gfortran-8 -fopenmp omp.f90 -o omp
+          type gfortran-8
+          gfortran-8 --version
+          gfortran-8 -v
       - name: compile with Homebrew Gfortran 9
         run: |
           gfortran-9 -fopenmp omp.f90 -o omp
           type gfortran-9
           gfortran-9 --version
           gfortran-9 -v
-      - name: compile with conda-forge Gfortran 9 and link with -lgcc_eh
+      - name: compile with Homebrew Gfortran 10
+        run: |
+          gfortran-10 -fopenmp omp.f90 -o omp
+          type gfortran-10
+          gfortran-10 --version
+          gfortran-10 -v
+      - name: compile with conda-forge Gfortran 7.3
+        run: |
+          source /Users/runner/.bash_profile
+          conda create -c conda-forge -n gfortran-7.3 gfortran_osx-64=7.3
+          conda activate gfortran-7.3
+          gfortran -fopenmp omp.f90 -o omp
+          type gfortran
+          gfortran --version
+          gfortran -v   
+      - name: compile with conda-forge Gfortran 7.5
+        run: |
+          source /Users/runner/.bash_profile
+          conda create -c conda-forge -n gfortran-7.5 gfortran_osx-64=7.5
+          conda activate gfortran-7.5
+          gfortran -fopenmp omp.f90 -o omp
+          type gfortran
+          gfortran --version
+          gfortran -v      
+      - name: compile with conda-forge Gfortran 9.3 and link with -lgcc_eh
         run: |
           source /Users/runner/.bash_profile
           conda activate compilers
@@ -48,7 +78,7 @@ jobs:
           type gfortran
           gfortran --version
           gfortran -v       
-      - name: compile with conda-forge Gfortran 9 and link without -lgcc_eh
+      - name: compile with conda-forge Gfortran 9.3 and link without -lgcc_eh
         run: |
           source /Users/runner/.bash_profile
           conda activate compilers
