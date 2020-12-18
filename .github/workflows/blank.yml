@@ -62,14 +62,14 @@ jobs:
           type gfortran
           gfortran --version
           gfortran -v   
-      - name: compile with conda-forge Gfortran 7.5
+      - name: compile with conda-forge Gfortran 7.5 and link with -lgcc_eh
         run: |
           source /Users/runner/.bash_profile
           conda activate gfortran-7.5
-          gfortran -fopenmp omp.f90 -o omp
+          gfortran -fopenmp -lgcc_eh omp.f90 -o omp
           type gfortran
           gfortran --version
-          gfortran -v      
+          gfortran -v              
       - name: compile with conda-forge Gfortran 9.3 and link with -lgcc_eh
         run: |
           source /Users/runner/.bash_profile
@@ -78,6 +78,14 @@ jobs:
           type gfortran
           gfortran --version
           gfortran -v       
+      - name: compile with conda-forge Gfortran 7.5 and link without -lgcc_eh
+        run: |
+          source /Users/runner/.bash_profile
+          conda activate  gfortran-7.5
+          gfortran -fopenmp omp.f90 -o omp || :
+          type gfortran
+          gfortran --version
+          gfortran -v
       - name: compile with conda-forge Gfortran 9.3 and link without -lgcc_eh
         run: |
           source /Users/runner/.bash_profile
