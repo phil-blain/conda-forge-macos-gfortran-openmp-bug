@@ -33,7 +33,6 @@ jobs:
           conda init
           source /Users/runner/.bash_profile
           conda create -c conda-forge -n compilers compilers
-          conda activate compilers
           curl https://raw.githubusercontent.com/OpenMP/Examples/master/sources/Example_threadprivate.5.f -o omp.f90
       - name: compile with Homebrew Gfortran 9
         run: |
@@ -41,8 +40,10 @@ jobs:
           type gfortran-9
           gfortran-9 --version
           gfortran-9 -v
-      - name: compile with conda-foreg Gfortran 9
+      - name: compile with conda-forge Gfortran 9
         run: |
+          source /Users/runner/.bash_profile
+          conda activate compilers
           gfortran -fopenmp omp.f90 -o omp
           type gfortran
           gfortran --version
