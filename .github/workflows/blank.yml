@@ -37,7 +37,9 @@ jobs:
           conda create -c conda-forge -n gfortran-7.3 gfortran_osx-64=7.3
           curl https://raw.githubusercontent.com/OpenMP/Examples/master/sources/Example_threadprivate.5.f -o omp.f90
       - name: conda info
-        run: conda info
+        run: |
+          source /Users/runner/.bash_profile
+          conda info
       - name: compile with Homebrew Gfortran 8
         run: |
           gfortran-8 -fopenmp omp.f90 -o omp
